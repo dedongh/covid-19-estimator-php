@@ -90,20 +90,20 @@ function covid19ImpactEstimator($data)
         );
 
 
-      /* return array(
+       return array(
            "data" => $data,
            "estimate"=>array( "impact" => $responseImpact,
                "severeImpact" => $responseSevereImpact)
 
 
-       );*/
+       );
 
-         return json_encode(array(
+         /*return json_encode(array(
             "data" => $data,
                 "impact" => $responseImpact,
                 "severeImpact" => $responseSevereImpact
 
-        ));
+        ));*/
 
 
     }else{
