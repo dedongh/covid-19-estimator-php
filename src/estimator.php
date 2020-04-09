@@ -90,14 +90,18 @@ function covid19ImpactEstimator($data)
         );
 
 
+        //$response = array();
+
+
         return json_encode(array(
             "data" => $data,
-            "estimate"=> array(
+            //"estimate"=> array(
                 "impact" => $responseImpact,
                 "severeImpact" => $responseSevereImpact
-            )
+            //)
 
         ));
+
 
     }else{
         // set response code - 400 bad request
@@ -108,7 +112,7 @@ function covid19ImpactEstimator($data)
 
 }
 
-print covid19ImpactEstimator($decoded);
+print_r( covid19ImpactEstimator($decoded));
 
 
 function periodConverter($periodType, $timeToElapse)
