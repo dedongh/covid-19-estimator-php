@@ -71,21 +71,21 @@ function covid19ImpactEstimator($data)
 
         $responseImpact = array(
             "currentlyInfected" => $currentlyInfected,
-            "infectionsByRequestedTime" => $impactInfectionsByRequestedTime,
-            "severeCasesByRequestedTime" => $impactSevereCasesByRequestedTime,
-            "hospitalBedsByRequestedTime" => $impactHospitalBedsByRequestedTime,
-            "casesForICUByRequestedTime" => $casesForICUByRequestedTime,
-            "casesForVentilatorsByRequestedTime" => $casesForVentilatorsByRequestedTime,
+            "infectionsByRequestedTime" => (int)$impactInfectionsByRequestedTime,
+            "severeCasesByRequestedTime" => (int)$impactSevereCasesByRequestedTime,
+            "hospitalBedsByRequestedTime" => (int)$impactHospitalBedsByRequestedTime,
+            "casesForICUByRequestedTime" => (int)$casesForICUByRequestedTime,
+            "casesForVentilatorsByRequestedTime" => (int)$casesForVentilatorsByRequestedTime,
             "dollarsInFlight" => $dollarsInFlight
         );
 
         $responseSevereImpact = array(
             "currentlyInfected" => $severeCurrentlyInfected,
-            "infectionsByRequestedTime" => $severeInfectionsByRequestedTime,
-            "severeCasesByRequestedTime" => $severeCasesByRequestedTime,
-            "hospitalBedsByRequestedTime" => $severeHospitalBedsByRequestedTime,
-            "casesForICUByRequestedTime" => $severeCasesForICUByRequestedTime,
-            "casesForVentilatorsByRequestedTime" => $severeCasesForVentilatorsByRequestedTime,
+            "infectionsByRequestedTime" => (int)$severeInfectionsByRequestedTime,
+            "severeCasesByRequestedTime" => (int)$severeCasesByRequestedTime,
+            "hospitalBedsByRequestedTime" => (int)$severeHospitalBedsByRequestedTime,
+            "casesForICUByRequestedTime" => (int)$severeCasesForICUByRequestedTime,
+            "casesForVentilatorsByRequestedTime" => (int)$severeCasesForVentilatorsByRequestedTime,
             "dollarsInFlight" => $severeDollarsInFlight
         );
 
