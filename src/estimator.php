@@ -92,10 +92,8 @@ function covid19ImpactEstimator($data)
 
        return array(
            "data" => $data,
-           "estimate"=>array( "impact" => $responseImpact,
-               "severeImpact" => $responseSevereImpact)
-
-
+           "impact" => $responseImpact,
+               "severeImpact" => $responseSevereImpact
        );
 
          /*return json_encode(array(
