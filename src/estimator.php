@@ -151,7 +151,8 @@ function infectionsByRequestedTime($currentlyInfected, $periodType, $timeToElaps
 
 function availableHospitalBeds($totalHospitalBeds, $cases)
 {
-    $availableBeds = floor(0.35 * $totalHospitalBeds);
+    //$availableBeds = floor(0.35 * $totalHospitalBeds);
+    $availableBeds = 0.35 * $totalHospitalBeds;
 
     return $availableBeds - $cases;
 }
