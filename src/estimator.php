@@ -24,16 +24,13 @@ $content = trim(file_get_contents("php://input"));
 $decoded = json_decode($content, true);
 
 //If json_decode failed, the JSON is invalid.
-if (!is_array($decoded)) {
+/*if (!is_array($decoded)) {
     throw new Exception('Received content contained invalid JSON!');
-}
+}*/
 
 
 function covid19ImpactEstimator($data)
 {
-    $responseData = array();
-    $responseImpact = array();
-    $responseSevereImpact = array();
 
     if (!empty($data)) {
         // set response code - 200 OK
