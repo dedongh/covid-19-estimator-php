@@ -70,32 +70,40 @@ function covid19ImpactEstimator($data)
             $avgDailyIncomeInUSD, $avgDailyIncomePopulation);
 
         $responseImpact = array(
-            "currentlyInfected" => $currentlyInfected,
-            "infectionsByRequestedTime" => $impactInfectionsByRequestedTime,
-            "severeCasesByRequestedTime" => $impactSevereCasesByRequestedTime,
-            "hospitalBedsByRequestedTime" => $impactHospitalBedsByRequestedTime,
-            "casesForICUByRequestedTime" => $casesForICUByRequestedTime,
-            "casesForVentilatorsByRequestedTime" => $casesForVentilatorsByRequestedTime,
+            "currentlyInfected" => intval($currentlyInfected),
+            "infectionsByRequestedTime" => intval($impactInfectionsByRequestedTime),
+            "severeCasesByRequestedTime" => intval($impactSevereCasesByRequestedTime),
+            "hospitalBedsByRequestedTime" => intval($impactHospitalBedsByRequestedTime),
+            "casesForICUByRequestedTime" => intval($casesForICUByRequestedTime),
+            "casesForVentilatorsByRequestedTime" => intval($casesForVentilatorsByRequestedTime),
             "dollarsInFlight" => $dollarsInFlight
         );
 
         $responseSevereImpact = array(
-            "currentlyInfected" => $severeCurrentlyInfected,
-            "infectionsByRequestedTime" => $severeInfectionsByRequestedTime,
-            "severeCasesByRequestedTime" => $severeCasesByRequestedTime,
-            "hospitalBedsByRequestedTime" => $severeHospitalBedsByRequestedTime,
-            "casesForICUByRequestedTime" => $severeCasesForICUByRequestedTime,
-            "casesForVentilatorsByRequestedTime" => $severeCasesForVentilatorsByRequestedTime,
+            "currentlyInfected" => intval($severeCurrentlyInfected),
+            "infectionsByRequestedTime" => intval($severeInfectionsByRequestedTime),
+            "severeCasesByRequestedTime" => intval($severeCasesByRequestedTime),
+            "hospitalBedsByRequestedTime" => intval($severeHospitalBedsByRequestedTime),
+            "casesForICUByRequestedTime" => intval($severeCasesForICUByRequestedTime),
+            "casesForVentilatorsByRequestedTime" => intval($severeCasesForVentilatorsByRequestedTime),
             "dollarsInFlight" => $severeDollarsInFlight
         );
 
 
        return array(
            "data" => $data,
-           "impact" => $responseImpact,
-           "severeImpact" => $responseSevereImpact
+           "estimate"=>array( "impact" => $responseImpact,
+               "severeImpact" => $responseSevereImpact)
+
 
        );
+
+        /* return json_encode(array(
+            "data" => $data,
+                "impact" => $responseImpact,
+                "severeImpact" => $responseSevereImpact
+
+        ));*/
 
 
     }else{
