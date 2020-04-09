@@ -76,7 +76,7 @@ function covid19ImpactEstimator($data)
             "hospitalBedsByRequestedTime" => (int)$impactHospitalBedsByRequestedTime,
             "casesForICUByRequestedTime" => (int)$casesForICUByRequestedTime,
             "casesForVentilatorsByRequestedTime" => (int)$casesForVentilatorsByRequestedTime,
-            "dollarsInFlight" => $dollarsInFlight
+            "dollarsInFlight" => (int)$dollarsInFlight
         );
 
         $responseSevereImpact = array(
@@ -86,7 +86,7 @@ function covid19ImpactEstimator($data)
             "hospitalBedsByRequestedTime" => (int)$severeHospitalBedsByRequestedTime,
             "casesForICUByRequestedTime" => (int)$severeCasesForICUByRequestedTime,
             "casesForVentilatorsByRequestedTime" => (int)$severeCasesForVentilatorsByRequestedTime,
-            "dollarsInFlight" => $severeDollarsInFlight
+            "dollarsInFlight" => (int)$severeDollarsInFlight
         );
 
 
@@ -172,6 +172,6 @@ function dollarsInFlight($infectionsByRequestedTime,$periodType, $timeToElapse,
 {
     $days = floor(periodConverter($periodType, $timeToElapse));
 
-    $dollars =  $infectionsByRequestedTime * $avgDailyIncomeInUSD * $avgDailyIncomePopulation * $days;
-    return round($dollars, 1);
+    $dollars =  ($infectionsByRequestedTime * $avgDailyIncomeInUSD * $avgDailyIncomePopulation) / $days;
+    return floor($dollars);
 }
