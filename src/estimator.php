@@ -90,24 +90,26 @@ function covid19ImpactEstimator($data)
         );
 
 
-        //$response = array();
-
-
-        return json_encode(array(
+       /* return json_encode(array(
             "data" => $data,
-            //"estimate"=> array(
                 "impact" => $responseImpact,
                 "severeImpact" => $responseSevereImpact
-            //)
 
-        ));
+        ));*/
+
+       return array(
+           "data" => $data,
+           "impact" => $responseImpact,
+           "severeImpact" => $responseSevereImpact
+
+       );
 
 
     }else{
         // set response code - 400 bad request
         http_response_code(400);
 
-        return json_encode(array("message" => "Data should not be empty"));
+        return array("message" => "Data should not be empty");
     }
 
 }
