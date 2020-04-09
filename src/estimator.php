@@ -7,7 +7,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 //Make sure that it is a POST request.
-if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') != 0) {
+/*if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') != 0) {
     throw new Exception('Request method must be POST!');
 }
 
@@ -15,7 +15,7 @@ if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') != 0) {
 $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 if (strcasecmp($contentType, 'application/json') != 0) {
     throw new Exception('Content type must be: application/json');
-}
+}*/
 
 //Receive the RAW post data.
 $content = trim(file_get_contents("php://input"));
