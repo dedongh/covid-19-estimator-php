@@ -1,12 +1,12 @@
 <?php
-
+header("Content-Type: application/json; charset=UTF-8");
 include "estimator.php";
 
 print print_json($decoded);
 
 function print_json($data)
 {
-    header("Content-Type: application/json; charset=UTF-8");
+
     $json_array = covid19ImpactEstimator($data);
 
     return json_encode($json_array);

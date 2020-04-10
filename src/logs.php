@@ -1,7 +1,7 @@
 <?php
-
-include "estimator.php";
 header("Content-Type: text/plain");
+include "estimator.php";
+
 $time2 = microtime(true);
 
 $exe_time = ($time2- $_SERVER["REQUEST_TIME_FLOAT"])* 1000;

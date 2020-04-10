@@ -1,9 +1,9 @@
 <?php
+header("Content-Type: text/xml");
 include "estimator.php";
 print (print_xml($decoded));
 function print_xml($data)
 {
-    header("Content-Type: text/plain");
     $xml_array = covid19ImpactEstimator($data);
 
 
