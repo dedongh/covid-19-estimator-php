@@ -1,4 +1,5 @@
 <?php
+$time1 = microtime(true);
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -107,7 +108,7 @@ function covid19ImpactEstimator($data)
 
 }
 
-print_r( covid19ImpactEstimator($decoded));
+//print_r( covid19ImpactEstimator($decoded));
 
 
 
