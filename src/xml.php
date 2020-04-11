@@ -21,7 +21,7 @@ function hhb_xml_encode(array $arr, string $name_for_numeric_keys = 'val'): stri
     };
 
     $iterator = $arr;
-    $domd = new DOMDocument("1.0", "utf-8");
+    $domd = new DOMDocument("1.0");
     $root = $domd->createElement ( 'root' );
     foreach ( $iterator as $key => $val ) {
 
@@ -56,7 +56,7 @@ function hhb_xml_encode(array $arr, string $name_for_numeric_keys = 'val'): stri
     $domd->formatOutput = true;
 
     $ret = $domd->saveXML ( $root );
-    return '<?xml version="1.0" encoding="UTF-8"?>' . $ret ;
+    return '<?xml version="1.0"?>' . $ret ;
 }
 
 
