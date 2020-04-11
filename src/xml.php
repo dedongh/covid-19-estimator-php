@@ -1,5 +1,6 @@
 <?php
-header("Content-Type: text/xml");
+//header("Content-Type: text/xml;charset=utf-8");
+header("Content-Type: application/xml");
 include "estimator.php";
 
 
