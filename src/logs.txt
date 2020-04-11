@@ -1,4 +1,0 @@
-POST		/SDGA/api/v1/on-covid-19/xml		200		12.08 ms
-POST		/SDGA/api/v1/on-covid-19/xml		200		5.26 ms
-POST		/SDGA/api/v1/on-covid-19/xml		200		7.67 ms
-POST		/SDGA/api/v1/on-covid-19		200		5.7ms
