@@ -3,7 +3,52 @@ header("Content-Type: text/xml");
 include "estimator.php";
 
 
-echo hhb_xml_encode(covid19ImpactEstimator($decoded));
+//echo hhb_xml_encode(covid19ImpactEstimator($decoded));
+
+
+
+
+echo xml_encode(covid19ImpactEstimator($decoded));
+function xml_encode($mixed, $domElement=null, $DOMDocument=null) {
+    if (is_null($DOMDocument)) {
+        $DOMDocument =new DOMDocument;
+        $DOMDocument->formatOutput = true;
+        xml_encode($mixed, $DOMDocument, $DOMDocument);
+        return $DOMDocument->saveXML();
+    }
+    else {
+        if (is_array($mixed)) {
+            foreach ($mixed as $index => $mixedElement) {
+                if (is_int($index)) {
+                    if ($index === 0) {
+                        $node = $domElement;
+                    }
+                    else {
+                        $node = $DOMDocument->createElement($domElement->tagName);
+                        $domElement->parentNode->appendChild($node);
+                    }
+                }
+                else {
+                    $plural = $DOMDocument->createElement($index);
+                    $domElement->appendChild($plural);
+                    $node = $plural;
+                }
+
+                xml_encode($mixedElement, $node, $DOMDocument);
+            }
+        }
+        else {
+            $domElement->appendChild($DOMDocument->createTextNode($mixed));
+        }
+    }
+}
+
+
+$time2 = microtime(true);
+
+$exe_time = ($time2- $_SERVER["REQUEST_TIME_FLOAT"])* 1000;
+$logMessage = $_SERVER['REQUEST_METHOD']. "\t\t".$_SERVER['REQUEST_URI']. "\t\t".http_response_code()."\t\t". round($exe_time,2)." ms";
+file_put_contents('logs.txt', $logMessage."\n", FILE_APPEND | LOCK_EX);
 
 
 function hhb_xml_encode(array $arr, string $name_for_numeric_keys = 'val'): string {
@@ -31,8 +76,6 @@ function hhb_xml_encode(array $arr, string $name_for_numeric_keys = 'val'): stri
         $domd->formatOutput = true;
         $domd->loadXML ( '<root>' . $xml . '</root>' );
         $ret = trim ( $domd->saveXML ( $domd->getElementsByTagName ( "root" )->item ( 0 ) ) );
-        assert ( 0 === strpos ( $ret, '<root>' ) );
-        assert ( $endsWith ( $ret, '</root>' ) );
         $full = trim ( substr ( $ret, strlen ( '<root>' ), - strlen ( '</root>' ) ) );
         $ret = '';
         foreach ( explode ( "\n", $full ) as $line ) {
@@ -50,14 +93,13 @@ function hhb_xml_encode(array $arr, string $name_for_numeric_keys = 'val'): stri
     $domd = new DOMDocument ();
     $root = $domd->createElement ( 'root' );
     foreach ( $iterator as $key => $val ) {
-        // var_dump ( $key, $val );
+
         $ele = $domd->createElement ( is_int ( $key ) ? $name_for_numeric_keys : $key );
         if (! empty ( $val ) || $val === '0') {
             if ($is_iterable_compat ( $val )) {
                 $asoc = $isAssoc ( $val );
                 $tmp = hhb_xml_encode ( $val, is_int ( $key ) ? $name_for_numeric_keys : $key );
-                // var_dump ( $tmp );
-                // die ();
+
                 $tmp = @DOMDocument::loadXML ( '<root>' . $tmp . '</root>' );
                 foreach ( $tmp->getElementsByTagName ( "root" )->item ( 0 )->childNodes ?? [ ] as $tmp2 ) {
                     $tmp3 = $domd->importNode ( $tmp2, true );
@@ -69,8 +111,7 @@ function hhb_xml_encode(array $arr, string $name_for_numeric_keys = 'val'): stri
                 }
                 unset ( $tmp, $tmp2, $tmp3 );
                 if (! $asoc) {
-                    // echo 'REMOVING';die();
-                    // $ele->parentNode->removeChild($ele);
+
                     continue;
                 }
             } else {
@@ -82,17 +123,9 @@ function hhb_xml_encode(array $arr, string $name_for_numeric_keys = 'val'): stri
     $domd->preserveWhiteSpace = false;
     $domd->formatOutput = true;
     $ret = trim ( $domd->saveXML ( $root ) );
-    assert ( 0 === strpos ( $ret, '<root>' ) );
-    assert ( $endsWith ( $ret, '</root>' ) );
     $ret = trim ( substr ( $ret, strlen ( '<root>' ), - strlen ( '</root>' ) ) );
-    // seems to be a bug with formatOutput on DOMDocuments that have used importNode with $deep=true..
+
     $ret = $formatXML ( $ret );
+    /*return '<?xml version="1.0" ?><root>' . $ret . '</root>';*/
     return $ret;
 }
-
-
-$time2 = microtime(true);
-
-$exe_time = ($time2- $_SERVER["REQUEST_TIME_FLOAT"])* 1000;
-$logMessage = $_SERVER['REQUEST_METHOD']. "\t\t".$_SERVER['REQUEST_URI']. "\t\t".http_response_code()."\t\t". round($exe_time,2)." ms";
-file_put_contents('logs.txt', $logMessage."\n", FILE_APPEND | LOCK_EX);
